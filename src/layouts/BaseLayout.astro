@@ -3,6 +3,9 @@ import "../styles/global.css";
 import Footer from "@components/Footer.astro";
 import "katex/dist/katex.min.css";
 
+// Animated link preview, rendered from the home page's prism by scripts/og-prism.ts.
+const PRISM_OG = "/og-prism.gif";
+
 const {
     title,
     description,
@@ -11,14 +14,14 @@ const {
     publishedTime,
     modifiedTime,
     keywords = [],
-    ogImage,
+    ogImage = PRISM_OG,
     bodyClass = "",
     showHeader = true,
 } = Astro.props;
 
 const siteName = "talkinghead";
 const canonicalUrl = new URL(canonical, Astro.site);
-const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+const ogImageUrl = new URL(ogImage, Astro.site).toString();
 const pageTitle = title ? `${siteName} - ${title}` : siteName;
 const keywordContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
 
@@ -41,12 +44,20 @@ const keywordContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
         <meta property="og:description" content={description} />
         <meta property="og:type" content={ogType} />
         <meta property="og:url" content={canonicalUrl.toString()} />
-        {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+        <meta property="og:image" content={ogImageUrl} />
+        {ogImage === PRISM_OG && (
+            <>
+                <meta property="og:image:type" content="image/gif" />
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:alt" content="Um prisma de vidro decompondo um feixe de luz branca em um arco-íris" />
+            </>
+        )}
 
-        <meta name="twitter:card" content={ogImageUrl ? "summary_large_image" : "summary"} />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={pageTitle} />
         <meta name="twitter:description" content={description} />
-        {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+        <meta name="twitter:image" content={ogImageUrl} />
 
         {publishedTime && (
             <meta property="article:published_time" content={publishedTime} />
