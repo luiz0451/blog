@@ -51,6 +51,11 @@ const keywordContent = Array.isArray(keywords) ? keywords.join(", ") : keywords;
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />
                 <meta property="og:image:alt" content="Um prisma de vidro decompondo um feixe de luz branca em um arco-íris" />
+                <meta property="og:video" content={new URL("/og-prism.mp4", Astro.site).toString()} />
+                <meta property="og:video:secure_url" content={new URL("/og-prism.mp4", Astro.site).toString()} />
+                <meta property="og:video:type" content="video/mp4" />
+                <meta property="og:video:width" content="1200" />
+                <meta property="og:video:height" content="630" />
             </>
         )}
 

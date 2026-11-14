@@ -1,7 +1,9 @@
 // Renders the home page's black prism (public/ascii/black-prism.js) as the site's
-// link-preview image: public/og-prism.gif, 1200×630, a seamless loop.
-// Run: bun scripts/og-prism.ts
+// link preview, 1200×630, a seamless loop: public/og-prism.mp4 for og:video
+// (iMessage autoplays it, muted and looping) and public/og-prism.gif for og:image.
+// Run: bun run og
 import type { Frame } from "ascii.rest";
+import ffmpeg from "ffmpeg-static";
 import sharp from "sharp";
 import * as prism from "../public/ascii/black-prism.js";
 
@@ -83,9 +85,21 @@ for (let i = 0; i < FRAMES; i++) {
     for (let k = 0; k < a.length; k++) frames[off + k] = Math.round(a[k]! * (1 - w) + b[k]! * w);
 }
 
-const out = new URL("../public/og-prism.gif", import.meta.url).pathname;
+const gif = new URL("../public/og-prism.gif", import.meta.url).pathname;
 await sharp(frames, { raw: { width: WIDTH, height: HEIGHT * FRAMES, channels: 3, pageHeight: HEIGHT } })
     // 64 colours and lossy inter-frame deltas keep it near 400 KB, small enough for chat apps' preview fetchers.
     .gif({ loop: 0, delay: Array(FRAMES).fill(Math.round(1000 / FPS)), effort: 10, colours: 64, interFrameMaxError: 6 })
-    .toFile(out);
-console.log(`${out}: ${FRAMES} frames`);
+    .toFile(gif);
+console.log(`${gif}: ${FRAMES} frames`);
+
+// H.264 in yuv420p with the index up front: what Messages and browsers play inline.
+const mp4 = new URL("../public/og-prism.mp4", import.meta.url).pathname;
+const encode = Bun.spawn(
+    [ffmpeg!, "-y", "-loglevel", "error",
+        "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", `${WIDTH}x${HEIGHT}`, "-r", String(FPS), "-i", "-",
+        "-c:v", "libx264", "-preset", "veryslow", "-crf", "20", "-tune", "animation",
+        "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-an", mp4],
+    { stdin: frames, stdout: "inherit", stderr: "inherit" },
+);
+if ((await encode.exited) !== 0) throw new Error(`ffmpeg exited with ${encode.exitCode}`);
+console.log(`${mp4}: ${FRAMES} frames`);
