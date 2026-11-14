@@ -21,6 +21,13 @@ const links = [
                     ))}
                 </nav>
             </div>
+            <ascii-art
+                src="/ascii/black-prism.js"
+                label="Um prisma de vidro decompondo um feixe de luz branca em um arco-íris"
+                class="prism mb-6 block"
+            >
+                <div class="aspect-2/1"></div>
+            </ascii-art>
             <div class="justified [&>p+p]:mt-4">
                 <slot />
             </div>
@@ -30,3 +37,24 @@ const links = [
     </section>
     <Fragment slot="footer" />
 </BaseLayout>
+
+<script>
+    import "ascii.rest/element";
+</script>
+
+<style>
+    /* Fade the canvas edges so the beam and spectrum dissolve into the page instead of ending at a box. */
+    .prism {
+        mask-image:
+            linear-gradient(to right, transparent, #000 12%, #000 88%, transparent),
+            linear-gradient(to bottom, #000 70%, transparent);
+        mask-composite: intersect;
+    }
+
+    /* The piece is light on dark; on the light theme flip its lightness and keep its hues. */
+    @media (prefers-color-scheme: light) {
+        .prism {
+            filter: invert(1) hue-rotate(180deg);
+        }
+    }
+</style>
