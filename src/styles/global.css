@@ -1,23 +1,46 @@
-/* Fira Mono ships no italic; the browser synthesizes oblique for <em>. */
+/* Sarasa Mono CL (Iosevka Latin + Source Han Sans CJK), Nerd Font patched. No italic; the browser synthesizes oblique for <em>. */
 @font-face {
-    font-family: "FiraMono Nerd Font Mono";
-    src: url("/fonts/fira-mono-nerd-regular.woff2") format("woff2");
+    font-family: "Sarasa Mono CL";
+    src: url("/fonts/sarasa-mono-cl-regular-nerd-font.woff2") format("woff2");
     font-style: normal;
     font-weight: 400;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "FiraMono Nerd Font Mono";
-    src: url("/fonts/fira-mono-nerd-medium.woff2") format("woff2");
+    font-family: "Sarasa Mono CL";
+    src: url("/fonts/sarasa-mono-cl-semibold-nerd-font.woff2") format("woff2");
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "FiraMono Nerd Font Mono";
-    src: url("/fonts/fira-mono-nerd-bold.woff2") format("woff2");
+    font-family: "Sarasa Mono CL";
+    src: url("/fonts/sarasa-mono-cl-bold-nerd-font.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Sarasa Gothic CL";
+    src: url("/fonts/sarasa-gothic-cl-regular-nerd-font.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sarasa Gothic CL";
+    src: url("/fonts/sarasa-gothic-cl-semibold-nerd-font.woff2") format("woff2");
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Sarasa Gothic CL";
+    src: url("/fonts/sarasa-gothic-cl-bold-nerd-font.woff2") format("woff2");
     font-style: normal;
     font-weight: 700;
     font-display: swap;
@@ -30,7 +53,6 @@
     font-weight: 700;
     font-display: swap;
 }
-
 
 @import "tailwindcss";
 
@@ -56,8 +78,8 @@
         --theme-selection-bg: #007173; /* Visual [23, 152] */
         --theme-selection-fg: var(--theme-text);
         --theme-border: #3f3f3f;      /* MatchParen [bg+3, bg-3] */
-        --font-mono: "FiraMono Nerd Font Mono", monospace;
-        --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --font-mono: "Sarasa Mono CL", monospace;
+        --font-sans: "Sarasa Gothic CL", sans-serif;
         --nvim-divider-pattern: "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
     }
 
