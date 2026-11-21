@@ -1,51 +1,3 @@
-/* Sarasa Mono CL (Iosevka Latin + Source Han Sans CJK), Nerd Font patched. No italic; the browser synthesizes oblique for <em>. */
-@font-face {
-    font-family: "Sarasa Mono CL";
-    src: url("/fonts/sarasa-mono-cl-regular-nerd-font.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Sarasa Mono CL";
-    src: url("/fonts/sarasa-mono-cl-semibold-nerd-font.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Sarasa Mono CL";
-    src: url("/fonts/sarasa-mono-cl-bold-nerd-font.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Sarasa Gothic CL";
-    src: url("/fonts/sarasa-gothic-cl-regular-nerd-font.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Sarasa Gothic CL";
-    src: url("/fonts/sarasa-gothic-cl-semibold-nerd-font.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Sarasa Gothic CL";
-    src: url("/fonts/sarasa-gothic-cl-bold-nerd-font.woff2") format("woff2");
-    font-style: normal;
-    font-weight: 700;
-    font-display: swap;
-}
-
 @font-face {
     font-family: "Cheltenham Bold Condensed";
     src: url("/fonts/cheltenham-bold-condensed.ttf") format("truetype");
@@ -78,8 +30,9 @@
         --theme-selection-bg: #007173; /* Visual [23, 152] */
         --theme-selection-fg: var(--theme-text);
         --theme-border: #3f3f3f;      /* MatchParen [bg+3, bg-3] */
-        --font-mono: "Sarasa Mono CL", monospace;
-        --font-sans: "Sarasa Gothic CL", sans-serif;
+        --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+        --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --font-serif: ui-serif, "New York", "Iowan Old Style", Georgia, "Times New Roman", serif;
         --nvim-divider-pattern: "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -";
     }
 
@@ -147,6 +100,18 @@
     h3 {
         @apply text-xl leading-tight;
         font-weight: 500;
+    }
+
+    /* Reading text is serif; interface (nav, meta, tags, footer, labels) stays sans; mono is code and dividers only. */
+    h1,
+    h2,
+    h3,
+    .reading,
+    .post-content,
+    .tldr,
+    .post-title-link,
+    .update-title {
+        font-family: var(--font-serif);
     }
 
     strong,
@@ -279,6 +244,8 @@
         .experience-logo[src$="ibict.png"] { filter: brightness(2.6); }
     }
 
+    .nowrap { white-space: nowrap; }
+
     .inline-logo {
         display: inline-block;
         width: 1.1em;
@@ -304,7 +271,7 @@
 
     .tldr-label {
         color: var(--theme-text-subtle);
-        font-family: var(--font-mono);
+        font-family: var(--font-sans);
         font-size: 0.8125rem;
     }
 
@@ -442,7 +409,7 @@
 
     .draft-note {
         color: var(--theme-orange);
-        font-family: var(--font-mono);
+        font-family: var(--font-sans);
         font-size: 0.875rem;
         font-weight: 500;
     }

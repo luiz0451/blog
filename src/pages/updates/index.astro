@@ -25,7 +25,7 @@ const updates = await Promise.all(entries.map(async (update) => ({
                         {formatDate(update.data.date)}
                     </time>
                     <p class="update-title mt-1">{update.data.update}</p>
-                    <div class="muted mt-1">
+                    <div class="reading muted mt-1">
                         <Content />
                     </div>
                 </li>

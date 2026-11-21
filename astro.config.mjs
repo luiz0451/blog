@@ -16,7 +16,7 @@ import { glossarySchema } from "./src/schemas/glossary.ts";
  * @typedef {import("hast").Root} HastRoot
  */
 
-const codeFontStack = '"Sarasa Mono CL", monospace';
+const codeFontStack = 'ui-monospace, "SF Mono", Menlo, Consolas, monospace';
 const site = "https://blog.luizlab.com.br";
 
 /**
